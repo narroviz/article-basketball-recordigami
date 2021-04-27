@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang='en' data-version='{{timestamp}}'>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://unpkg.com/enter-view"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+
+	{{> base/meta}}
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link inline rel='stylesheet' href='bundle.css' />
+
+	{{> base/font}}
+
+	{{> base/analytics }}
+
+</head>
+
+<body>
+
+	{{> base/header 'sticky'}}
+
+	<main id='content'>
+		<div class='intro'>
+			<h1 class='intro__hed'>WNBA Recordigami</h1>
+			<p class='intro__dek'>Pioneering wins and losses in the regular season.</p>
+			<p class='intro__byline'>By
+				<a href='http://dnewcomb.com' class="link-text" target='_blank'>
+					<strong>David Newcomb</strong>
+				</a>
+			</p>
+			<time class='intro__time'>May 2021</time>
+			<div class='intro__prelude'>
+				<p>
+	                In 2016, Jon Bois introduced the concept of <a target='_blank' href="https://www.sbnation.com/2016/12/7/13856392/chart-party-scorigami" class="link-text">scorigami</a> for the NFL. He defined it as the "art of achieving a final score that has never happened before." I'd like to build on that idea and add <span class='bold'>recordigami</span> to the lexicon. Recordigami is the art of <span class='bold'>achieving a regular season team record that has never happened before</span>.<br><br>For example, the historic <a target='_blank' href="https://www.basketball-reference.com/wnba/years/1998.html" class="link-text">1998 Houston Comets</a> achieved recordigami by being the first team to reach a 27-3 final record. However, along the way, they notched several other recordigamis, like being the first team to start 20-1. Their entire regular season was an unprecedented path. To learn more about the Season Triangle graph I used, visit my <a href="https://narro.design/html/wnba-season-triangle.html" class="link-text" target='_blank'>previous article</a>. And to see how recordigami has evolved through WNBA seasons, scroll below.
+	            </p>
+			</div>
+			</div>
+		</div>
+
+		<section id='scrolly-side'>
+			<div class='scrolly'>
+				<figure class='sticky'>
+					<div class="recordigami-container">
+						<div id="recordigami-paths-wrapper" class="graphic-wrapper">
+							<div id="basketball-autocomplete" class="autocomplete" >
+								<img class="exit-icon" src="../assets/images/icons/exit_icon.png"></img>
+					            <input type="text" class="form-control typeahead" id="basketball-team-input" placeholder="Choose your team">
+					        </div>
+						</div>
+					</div>
+				</figure>
+				<article class='article'>
+					<div class='step-intro' data-index='-2'></div>
+					<div class='step' data-index='-1'>
+						<div class='mobile-break'></div>
+						<h1 id="header--1"></h1>
+						<img class="large-image" src="../assets/images/icons/win_loss.png"></img>
+						<br>
+						<p>
+							On <span class='legend-text-1'>June 21, 1997</span>, the New York Liberty beat the Los Angeles Sparks <a href="https://therookiewire.usatoday.com/2020/06/21/history-on-this-day-wnba-played-its-first-regular-season-games/" target="_blank" class="link-text-1">67-57</a> in the first WNBA game. This produced the league's original <span class='bold'>recordigami</span> pair - the first team to go <span class='bold'>1-0</span> and the first team to go <span class='bold'>0-1</span>.
+						</p>
+					</div>
+					<div class='step' data-index='0'>
+						<div class='mobile-break'></div>
+						<h1 id="header-0"></h1>
+						<div style="max-height: 4rem; display: flex">
+							<img class="large-image"></img>
+							<img class="large-image" src="../assets/images/logos/WNBA/Houston Comets.png"></img>
+							<img class="large-image" src="../assets/images/logos/WNBA/Utah Starzz.png"></img>
+							<img class="large-image"></img>
+						</div>								<br>
+						<p>
+							In <span class='legend-text-1'>1997</span>, the WNBA regular season topped out at <span class='legend-text-1'>30</span> games. That year alone produced <span class='legend-text-1'>160</span> recordigamis, or about 30% of the all time total. The now defunct <a target='_blank' href="https://www.basketball-reference.com/wnba/teams/HOU/" class='link-text-1'>Houston Comets</a> and <a target='_blank' href="https://en.wikipedia.org/wiki/Utah_Starzz" class='link-text-1'>Utah Starzz</a> finished with the best and worst seasons, respectively.
+						</p>
+					</div>
+					<div class='step' data-index='1'>
+						<div class='mobile-break'></div>
+						<h1 id="header-1"></h1>
+						<img class="large-image" src="../assets/images/logos/WNBA/Houston Comets.png"></img>
+						<br>
+						<p>
+							From <span class='legend-text-2'>1998 - 2000</span>, the league expanded from 8 to 16 teams. Helping this 3-year period reach its <span class='legend-text-2'>235</span> recordigamis was <a href="https://en.wikipedia.org/wiki/Sheryl_Swoopes" target='_blank' class="link-text-2">Sheryl Swoopes</a>' <a target='_blank' href="https://theundefeated.com/features/houstons-comets-the-rise-and-fall-of-the-wnbas-first-dynasty/" class="link-text-2">Comets</a> team of 1998. Finishing <span class='legend-text-2'>27-3</span>, they set 22 recordigamis in a row, meaning about 73% of their season was unprecedented.
+						</p>
+					</div>
+					<div class='step' data-index='2'>
+						<div class='mobile-break'></div>
+						<div style="max-height: 4rem; display: flex">
+							<img class="large-image"></img>
+							<img class="large-image" src="../assets/images/logos/WNBA/Los Angeles Sparks.png"></img>
+							<img class="large-image" src="../assets/images/logos/WNBA/Detroit Shock.png"></img>
+							<img class="large-image"></img>
+						</div>							<br>
+						<h1 id="header-2"></h1>
+						<p>
+							By the end of <span class='legend-text-3'>2001 - 2003</span>, the WNBA reached its modern <span class='legend-text-3'>34</span> game season. An excellent few years from the <a class='link-text-3' target='_blank' href="https://www.basketball-reference.com/wnba/teams/LAS/">Los Angeles Sparks</a>, a championship <a class='link-text-3' target='_blank' href="https://www.basketball-reference.com/wnba/teams/DET/2003.html">2003 Detroit Shock</a> season, and a forgettable <a target='_blank' href="https://www.basketball-reference.com/wnba/teams/DET/2002.html" class='link-text-3'>2002 Detroit Shock</a> season contributed to this era's <span class='legend-text-3'>80</span> recordigamis.
+							
+						</p>
+					</div>
+					<div class='step' data-index='3'>
+						<div class='mobile-break'></div>
+						<img class="large-image" src="../assets/images/logos/WNBA/Connecticut Sun.png"></img>
+						<br>
+						<h1 id="header-3"></h1>
+						<p>
+							The next years from <span class='legend-text-4'>2004 - 2006</span> saw <span class='legend-text-4'>35</span> more recordigamis spread across a variety of teams. The <a target='_blank' href="https://www.basketball-reference.com/wnba/teams/CON/" class='link-text-4'>Connecticut Sun</a>, though, was the regular season powerhouse during this era. They were the first to hit <span class='legend-text-4'>26-8</span>, doing so in the consecutive seasons of 2005 &amp; 2006.
+						</p>
+					</div>
+					<div class='step' data-index='4'>
+						<div class='mobile-break'></div>
+						<img class="large-image" src="../assets/images/logos/WNBA/Atlanta Dream.png"></img>
+						<br>
+						<h1 id="header-4"></h1>
+						<p>
+							By the <span class='legend-text-5'>2007 - 2009</span> seasons, most easy recordigamis had been achieved. The clear-cut, (un)remarkable team of this era was the newly formed <a target='_blank' href="https://www.basketball-reference.com/wnba/teams/ATL/2008.html" class='link-text-4'>2008 Atlanta Dream</a>. They had the worst start in WNBA history at <span class='legend-text-5'>0-17</span>. And their difficulties that year led to 8 of the <span class='legend-text-5'>10</span> recordigamis from this 3-year stretch.
+					</div>
+					<div class='step' data-index='5'>
+						<div class='mobile-break'></div>
+						<div style="max-height: 4rem; display: flex">
+							<img class="large-image"></img>
+							<img class="large-image" src="../assets/images/logos/WNBA/Seattle Storm.png"></img>
+							<img class="large-image" src="../assets/images/logos/WNBA/Tulsa Shock.png"></img>
+							<img class="large-image"></img>
+						</div>						<br>
+						<h1 id="header-5"></h1>
+						<p>
+							The <span class='legend-text-6'>2010 - 2012</span> stretch built on both the positive and negative margins of possible records with <span class='legend-text-6'>23</span> recordigamis. On the plus side was the <a href="https://www.basketball-reference.com/wnba/teams/SEA/2010.html" class="link-text-6" target="_blank">2010 Seattle Storm</a>. They reached new heights, finishing the season at <span class='legend-text-6'>28-6</span>. On the flip side, the <a href="https://www.basketball-reference.com/wnba/teams/TUL/2011.html" class="link-text-6" target="_blank">2011 Tulsa Shock</a> reached new lows, finishing at <span class='legend-text-6'>3-31</span>.
+						</p>
+					</div>
+					<div class='step' data-index='6'>
+						<div class='mobile-break'></div>
+						<img class="large-image" src="../assets/images/logos/WNBA/Phoenix Mercury.png"></img>
+						<br>
+						<h1 id="header-6"></h1>
+						<p>
+							In 2014, the <a href="https://www.basketball-reference.com/wnba/teams/PHO/2014.html" class="link-text-7" target="_blank">Phoenix Mercury</a>, led by <a href="https://en.wikipedia.org/wiki/Diana_Taurasi" class="link-text-7" target="_blank">Diana Taurasi</a> and <a href="https://en.wikipedia.org/wiki/Brittney_Griner" class="link-text-7" target="_blank">Brittney Griner</a>, glided through the regular season to a best-ever <span class='legend-text-7'>29-5</span> record. The Mercury won its third franchise championship and achieved the only <span class='legend-text-7'>3</span> recordigamis of the <span class='legend-text-7'>2013 - 2015</span> window.
+						</p>
+					</div>
+					<div class='step' data-index='7'>
+						<div class='mobile-break'></div>
+						<img class="large-image" src="../assets/images/logos/WNBA/Minnesota Lynx.png"></img>
+						<br>
+						<h1 id="header-7"></h1>
+						<p>
+							On the way to their 5th of 6 Finals appearances, the <a href="https://www.basketball-reference.com/wnba/teams/MIN/2016.html" class="link-text-8" target="_blank">2016 Minnesota Lynx</a> jumped out to the best start in WNBA history: <span class='legend-text-8'>13-0</span>. Though they lost that year, the <a href="https://en.wikipedia.org/wiki/Maya_Moore" class="link-text-8" target="_blank">Maya Moore</a>-led Lynx won 4 titles between 2011 and 2017. They also posted the only <span class='legend-text-8'>3</span> recordigamis of the <span class='legend-text-8'>2016 - 2018</span> period.
+						</p>
+					</div>
+					<div class='step' data-index='8'>
+						<div class='mobile-break'></div>
+						<img class="large-image" src="../assets/images/icons/empty_set.png"></img>
+						<br>
+						<h1 id="header-8"></h1>
+						<p>
+							Due to COVID-19, the <span class='legend-text-9'>2019 - 2021</span> span still has <span class='legend-text-9'>0</span> recordigamis. The 2020 season would have had 36 games, but was <a href="https://www.espn.com/wnba/story/_/id/29314787/wnba-22-game-regular-season-playoffs-okd" class="link-text-9", target="_blank">shortened to 22</a>. Similarly, 2021 is being shortened to <a href="https://www.espn.com/wnba/story/_/id/31245044/2021-wnba-schedule-12-see-games-regular-season" class="link-text-9", target="_blank">34 games</a> due to the Olympics' postponement, although we could still see recordigami this summer. Regardless, by the next normal season, there should be at least 36 games, giving a 100% certainty of witnessing more recordigami as the schedule expands.
+						</p>
+					</div>
+					<div class='step' data-index='9'>
+						<div class='mobile-break'></div>
+						<img class="large-image" src="../assets/images/icons/win_loss_triangle.png"></img>
+						<br>
+						<h1 id="header-9"></h1>
+						<p>
+							Now that we've caught up to the present day, keep scrolling down and see how your favorite team has contributed to this history of recordigami.
+						</p>
+					</div>
+					<div class="interactive-div", id="interactive-div">
+						<div class='step-outro' data-index='10'><div class='mobile-break'></div></div>
+						<div class='step-outro' data-index='11'><div class='mobile-break'></div></div>
+						<div class='step-outro' data-index='12'><div class='mobile-break'></div></div>
+						<div class='step-outro' data-index='13'><div class='mobile-break'></div></div>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<svg x=0 y=0 width=55 height=55 style="display:none">
+		 <filter id="grayscale">
+		  <feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0"/>
+		 </filter>
+		</svg>
+
+ 		<br>
+		<script src="{{basepath}}assets/scripts/d3-delaunay.min.js"></script>
+        <script src="{{basepath}}assets/scripts/d3.v5.js"></script>
+        <script src="{{basepath}}assets/scripts/typeahead.bundle.js"></script>
+	</main>
+
+	{{> base/footer }}
+
+	<script src='main.js?version={{timestamp}}' async></script>
+</body>
+
+</html>
