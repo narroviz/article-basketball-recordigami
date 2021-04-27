@@ -207,6 +207,8 @@ span.twitter-typeahead .tt-suggestion.tt-cursor:hover
 
     article
         max-width 15rem
+        z-index 100
+        transform translate3d(0, 0, 200px)
 
         .step-intro
             min-height 1vh
@@ -261,7 +263,7 @@ span.twitter-typeahead .tt-suggestion.tt-cursor:hover
 
         .step
             position relative
-            z-index 50
+            z-index 100
             min-height 50vh
             margin-bottom 3rem
             background-color transparent
@@ -319,7 +321,7 @@ span.twitter-typeahead .tt-suggestion.tt-cursor:hover
         bottom 4rem
         top 6rem
         left 0
-        z-index 25
+        z-index 10
 
 @media (max-width: 10000px)
     #scrolly-side .scrolly
@@ -335,6 +337,8 @@ span.twitter-typeahead .tt-suggestion.tt-cursor:hover
             max-width 400px
             margin 0 auto
             position relative
+            z-index 100
+            transform translate3d(0, 0, 200px)
 
             .step-intro
                 max-height 1vh
@@ -350,7 +354,7 @@ span.twitter-typeahead .tt-suggestion.tt-cursor:hover
 
             .step
             	position relative
-                z-index 50
+                z-index 100
                 min-height 100vh
                 margin-top 30vh
                 &:last-of-type
@@ -395,7 +399,7 @@ span.twitter-typeahead .tt-suggestion.tt-cursor:hover
             margin 0
             top 17vh
             left 0
-            z-index 25
+            z-index 10
 
 @media (max-width: 1000px)
     #scrolly-side .scrolly
