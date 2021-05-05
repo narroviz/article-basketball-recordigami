@@ -334,7 +334,7 @@ function drawVoronoi(years, recordigamiData, xScale, yScale, dimensions, bounds,
 		.append("path")
 			.attr("class", "voronoi")
 			.attr("d", (d,i) => voronoi.renderCell(i))
-			// .style("stroke", "salmon")
+			.style("stroke", "salmon")
 			.on("mousemove", onMouseMove)
 			.on("mouseenter", onMouseEnter)
 			.on("mouseleave", onMouseLeave)
@@ -1187,6 +1187,31 @@ async function drawRecordigamiByTeam(league, filterTeam, recordigamiData, season
 					.on("mouseenter", onRecordigamiMouseEnter)
 					.on("mouseleave", onRecordigamiMouseLeave)
 
+		} else if (teamNumRecordigami === 2) {
+			bounds.selectAll(".voronoi").remove()
+			const teamRecordigamiYears = Object.keys(teamRecordigamiData)
+			const [duoPoints, duoMetadata] = getVoronoiPointsAndMetadata(teamRecordigamiYears, teamRecordigamiData, xScale, yScale, false)
+			const duoPaths = divideRectangularSVGRegionByTwoPoints(
+				parseFloat(duoPoints[0][0]),
+				parseFloat(duoPoints[1][0]),
+				parseFloat(duoPoints[0][1]),
+				parseFloat(duoPoints[1][1]),
+				dimensions.boundedWidth,
+				dimensions.boundedHeight
+			)
+			duoMetadata[0]["path"] = duoPaths[0]
+			duoMetadata[1]["path"] = duoPaths[1]
+			const duoDiagram = bounds.selectAll(".voronoi")
+				.data(duoMetadata)
+				.enter()
+				.append("path")
+					.attr("class", "voronoi")
+					.attr("d", (d) => d.path)
+					.style("stroke", "salmon")
+					.on("mousemove", onRecordigamiMouseMove)
+					.on("mouseenter", onRecordigamiMouseEnter)
+					.on("mouseleave", onRecordigamiMouseLeave)
+
 		} else if (teamNumRecordigami > 1) {
 			const teamRecordigamiYears = Object.keys(teamRecordigamiData)
 			drawVoronoiWithRetry(teamRecordigamiYears, teamRecordigamiData, xScale, yScale, dimensions, bounds, onRecordigamiMouseEnter, onRecordigamiMouseLeave, onRecordigamiMouseMove)
@@ -1225,6 +1250,136 @@ async function drawRecordigamiByTeam(league, filterTeam, recordigamiData, season
 
 	d3.selectAll('.logo').raise()
 }
+
+
+function divideRectangularSVGRegionByTwoPoints(x1, x2, y1, y2, svgWidth, svgHeight) {
+	const slope = -1 * (y1 - y2) / (x1 - x2)
+	const perpendicularSlope = (-1) / slope
+	// const directionalMultiplier = perpendicularSlope > 0 ? 1 : 1
+	console.log(slope)
+	console.log(perpendicularSlope)
+
+	const xBisect = x1 + ((x2 - x1) / 2)
+	const yBisect = y1 + ((y2 - y1) / 2)
+
+	const bottomX = xBisect - (svgHeight - yBisect) / perpendicularSlope
+	const bottomY = svgHeight
+
+	const leftX = 0
+	const leftY = yBisect + perpendicularSlope * xBisect
+
+	const rightX = svgWidth
+	const rightY = yBisect - (svgWidth - xBisect) * perpendicularSlope
+
+	const topX = xBisect + yBisect / perpendicularSlope
+	const topY = 0
+
+	const dividingLinePoints = []
+	
+	if (topX >= 0 && topX <= svgWidth) {
+		dividingLinePoints.push({
+			'segment': 'top',
+			'x': topX,
+			'y': topY,
+		})
+	}
+
+	if (rightY > 0 && rightY < svgHeight) {
+		dividingLinePoints.push({
+			'segment': 'right',
+			'x': rightX,
+			'y': rightY,
+		})
+	}
+
+	if (bottomX >= 0 && bottomX <= svgWidth) {
+		dividingLinePoints.push({
+			'segment': 'bottom',
+			'x': bottomX,
+			'y': bottomY,
+		})
+	}
+
+	if (leftY > 0 && leftY < svgHeight) {
+		dividingLinePoints.push({
+			'segment': 'left',
+			'x': leftX,
+			'y': leftY,
+		})
+	}
+
+	console.log(dividingLinePoints)
+
+	const dividingPaths = getSVGDividingPaths(dividingLinePoints, svgWidth, svgHeight)
+	return dividingPaths
+}
+
+// Clockwise from topLeft (the SVG origin)
+function getClockwiseSVGRectangleVertices(width, height) {
+	const topLeft = {'x': 0, 'y': 0} 
+	const topRight = {'x': width, 'y': 0} 
+	const bottomRight = {'x': width, 'y': height} 
+	const bottomLeft = {'x': 0, 'y': height}
+	return [topLeft, topRight, bottomRight, bottomLeft]
+}
+
+function getEvenNumbersBetweenTwoInts(minNumber, maxNumber) {
+  let evenNumbers = []
+  for (let i = Math.ceil((minNumber + 0.5) / 2) * 2; i < maxNumber; i += 2) {
+    evenNumbers.push(i)
+  }
+  return evenNumbers
+}
+
+function getPathFromPoints(points) {
+	let path = ''
+	for (var i = 0; i < points.length; i++) {
+		const point = points[i]
+		const x = point.x
+		const y = point.y
+		if (i === 0) {
+			path += `M ${x} ${y} `
+		}
+		path += `L ${x} ${y} `
+	}
+	path += 'Z'
+	return path
+}
+
+
+function getSVGDividingPaths(dividingLinePoints, width, height) {
+	const [c1, c2, c3, c4] = getClockwiseSVGRectangleVertices(width, height)
+	const clockwisePoints = [c1, 'top', c2, 'right', c3, 'bottom', c4, 'left']
+	
+	const firstPoint = dividingLinePoints[0]
+	const firstSegment = firstPoint['segment']
+	const firstIndex = clockwisePoints.indexOf(firstSegment)
+
+	const secondPoint = dividingLinePoints[1]
+	const secondSegment = secondPoint['segment']
+	const secondIndex = clockwisePoints.indexOf(secondSegment)
+
+	const pathVertexIndices = getEvenNumbersBetweenTwoInts(firstIndex, secondIndex)
+	const pathVertexPoints = pathVertexIndices.map(index => clockwisePoints[index])
+	const pathPoints = [firstPoint].concat(pathVertexPoints).concat([secondPoint])
+	const path = getPathFromPoints(pathPoints)
+
+	const complementaryVertexIndicesA = getEvenNumbersBetweenTwoInts(-1, firstIndex)
+	const complementaryVertexIndicesB = getEvenNumbersBetweenTwoInts(secondIndex, clockwisePoints.length)
+	const complementaryVertexPointsA = complementaryVertexIndicesA.map(index => clockwisePoints[index])
+	const complementaryVertexPointsB = complementaryVertexIndicesB.map(index => clockwisePoints[index])
+	const complementaryPathPoints = complementaryVertexPointsA.concat([firstPoint, secondPoint]).concat(complementaryVertexPointsB)
+	const complementaryPath = getPathFromPoints(complementaryPathPoints)
+
+	console.log(pathPoints)
+	console.log(path)
+
+	console.log(complementaryPathPoints)
+	console.log(complementaryPath)
+
+	return [path, complementaryPath]
+}
+
 
 async function updateChart(index, classIds, highlightColors, fadeColors, stage, league) {
 	const animationTime = 1000
@@ -1272,6 +1427,7 @@ async function updateChart(index, classIds, highlightColors, fadeColors, stage, 
 		if (stage === "enter") {
 			d3.selectAll(".logo").style("display", "block")
 			d3.select(".sticky").style("pointer-events", "all")
+			d3.select(".article").style("visibility", "hidden");
 			d3.selectAll("*[id^=num-recordigami]").style("opacity", 1).style("display", "block")
 			d3.select("#basketball-autocomplete").style("visibility", "visible")
 			if (DEFAULT_TEAM !== "" && DEFAULT_TEAM !== DEFAULT_FILTER_NAME) {
@@ -1282,6 +1438,7 @@ async function updateChart(index, classIds, highlightColors, fadeColors, stage, 
 		if (stage === "exit") {
 			d3.selectAll(".logo").style("display", "none")
 			d3.select(".sticky").style("pointer-events", "none")
+			d3.select(".article").style("visibility", "visible");
 			d3.selectAll("*[id^=num-recordigami]").style("opacity", 0).style("display", "none")
 			d3.select("#basketball-autocomplete").style("visibility", "hidden")
 			d3.select(".exit-icon").style("visibility", "hidden").style("pointer-events", "none")
